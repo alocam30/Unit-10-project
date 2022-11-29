@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 
 const UserSignUp = () => {
     const firstName = useRef(null);
@@ -55,8 +55,7 @@ const UserSignUp = () => {
                     <button className="button" type="submit">Sign Up</button>
                     <Link className="button button-secondary" to="/">Cancel</Link>
                 </form>
-                    <p>Already have a user account? Click here to {" "}
-                    <NavLink to="/signin">sign in</NavLink>
+                    <p>Already have a user account?<Link to="/signin">Click here to</Link> to sign in!
                     </p>
             </div>
         </main>

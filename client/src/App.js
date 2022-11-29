@@ -11,7 +11,7 @@ import UserSignUp from "./components/UserSignUp";
 import CourseDetail from "./components/CourseDetail";
 import UserSignOut from "./components/UserSignOut";
 import CreateCourse from "./components/CreateCourse";
-import UpdateCourse from './Components/UpdateCourse';
+import UpdateCourse from './components/UpdateCourse';
 
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
