@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import withContext from "./Context";
 
@@ -18,6 +18,9 @@ const CoursesWithContext = withContext(Courses);
 const UserSignInWithContext = withContext(UserSignIn);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignOutWithContext = withContext(UserSignOut);
+const CreateCourseWithContext = withContext(CreateCourse);
+const UpdateCourseWithContext = withContext(UpdateCourse);
+const UserSignUpWithContext = withContext(UserSignUp);
 
 const App = () => {
   return (
@@ -26,9 +29,12 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<CoursesWithContext />} />
+        <Route path="/courses/create" element={<CreateCourseWithContext />} />
         <Route path="courses/:id" element={<CourseDetailWithContext />} />
+        <Route path="courses/:id/update" element={<UpdateCourseWithContext />} />
         <Route path="/signin" element={<UserSignInWithContext />} />
         <Route path="/signout" element={<UserSignOutWithContext />} />
+        <Route path="/signup" element={<UserSignUpWithContext />} />
       </Routes>
     </React.Fragment>
   );
