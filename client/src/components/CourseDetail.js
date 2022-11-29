@@ -2,32 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const CourseDetail = ({ context }) => {
-    const [courses, setCourses] = useState([]);
+    const [course, setCourse] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         context.data
             .getCourse(id)
-            .then((data) => setCourses(data))
+            .then((data) => setCourse(data))
             .catch((err) => console.log(err));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <main>
-            <div className="wrap header--flex">
-                <h1 className="header--logo"><a href="index.html">Courses</a></h1>
-                <nav>
-                    <ul className="header--signedin">
-                        <li>Welcome, Joe Smith!</li>
-                        <li><a href="sign-out.html">Sign Out</a></li>
-                    </ul>
-                </nav>
-            </div>
             <div className="actions--bar">
                 <div className="wrap">
-                    <a className="button" href="update-course.html">Update Course</a>
-                    <a className="button" href="#">Delete Course</a>
-                    <a className="button button-secondary" href="index.html">Return to List</a>
+                    <Link className="button" to="update">Update Course</Link>
+                    <Link className="button" href="#">Delete Course</Link>
+                    <Link className="button button-secondary" to="/">Return to List</Link>
                 </div>
             </div>
 
@@ -37,7 +28,7 @@ const CourseDetail = ({ context }) => {
                     <div className="main--flex">
                         <div>
                             <h3 className="course--detail--title">Course</h3>
-                            <h4 className="course--name">Build a Basic Bookcase</h4>
+                            <h4 className="course--name">{course.title}</h4>
                             <p>By Joe Smith</p>
 
                             <p>High-end furniture projects are great to dream about. But unless you have a well-equipped shop and some serious woodworking experience to draw on, it can be difficult to turn the dream into a reality.</p>
