@@ -1,7 +1,9 @@
 
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import withContext from "./Context";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import withContext, { Provider } from "./Context";
+
+
 
 //------------------COMPONENTS---------------//
 import Header from "./components/Header";
@@ -24,19 +26,22 @@ const UserSignUpWithContext = withContext(UserSignUp);
 
 const App = () => {
   return (
+    <Provider>
     <React.Fragment>
       <HeaderWithContext />
-
-      <Routes>
-        <Route path="/" element={<CoursesWithContext />} />
-        <Route path="/courses/create" element={<CreateCourseWithContext />} />
-        <Route path="courses/:id" element={<CourseDetailWithContext />} />
-        <Route path="courses/:id/update" element={<UpdateCourseWithContext />} />
-        <Route path="/signin" element={<UserSignInWithContext />} />
-        <Route path="/signout" element={<UserSignOutWithContext />} />
-        <Route path="/signup" element={<UserSignUpWithContext />} />
-      </Routes>
+       <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<CoursesWithContext />} />
+          <Route path="/courses/create" element={<CreateCourseWithContext />} />
+          <Route path="courses/:id" element={<CourseDetailWithContext />} />
+          <Route path="courses/:id/update" element={<UpdateCourseWithContext />} />
+          <Route path="/signin" element={<UserSignInWithContext />} />
+          <Route path="/signout" element={<UserSignOutWithContext />} />
+          <Route path="/signup" element={<UserSignUpWithContext />} />
+        </Routes>
+       </BrowserRouter> 
     </React.Fragment>
+    </Provider> 
   );
 };
 
