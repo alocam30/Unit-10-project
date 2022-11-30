@@ -6,6 +6,7 @@ const UserSignUp = () => {
     const lastName = useRef(null);
     const emailAddress = useRef(null);
     const password = useRef(null);
+    const errors = useRef(null);
 
     const navigate = useNavigate();
 
@@ -39,6 +40,16 @@ const UserSignUp = () => {
         <main>
             <div className="form--centered">
                 <h2>Sign Up</h2>
+                {errors && errors.length ? (
+            <div className="validation--errors">
+                <h3>Validation Errors</h3>
+                <ul>
+                  {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                  ))}
+                </ul>
+            </div>
+             ) : null}
                 <form onSubmit={handleSignUp}>
                     <label htmlFor="firstName">First Name</label>
                     <input 

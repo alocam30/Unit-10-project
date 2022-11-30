@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 
 const CreateCourse = () => {
 const navigate = useNavigate();
+const errors = useRef();
 
 const [title, setTitle] = useState();
 const [courseDescription, setCourseDescription] = useState();
@@ -16,19 +17,34 @@ const handleChange= (e) => {
  setEstimatedTime(e.target.value);
  setMaterialsNeeded(e.target.value);
 
- navigate("/");
-};
+    useContext.data
+    .then ( (errors) => {
+        if (errors.length) {
+          this.setState({ errors });
+        } else {
+          console.log(`${title} was successfully created!`)
+        }
+      })
+      .catch( (err) => {
+        console.log(err);
+        this.props.history.push("/error");
+        })
+
+        navigate("/");
+        };
 
     return(
         <main>
             <div className="wrap">
                 <h2>Create Course</h2>
                 <div className="validation--errors">
-                    <h3>Validation Errors</h3>
-                    <ul>
-                        <li>Please provide a value for "Title"</li>
-                        <li>Please provide a value for "Description"</li>
-                    </ul>
+                <h3>Validation Errors</h3>
+                <ul>
+                  {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                  ))}
+                </ul>
+            </div>
                 </div>
                 <form onSubmit={handleChange}>
                     <div className="main--flex">
@@ -75,8 +91,7 @@ const handleChange= (e) => {
                      className="button" 
                      type="submit">Create Course</button>
                     <Link className="button button-secondary" to="/"> Cancel</Link>
-                </form>
-            </div>  
+                </form> 
         </main>          
     );
 } 

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {  useNavigate, useParams } from "react-router-dom";
 
 const UpdateCourse = ({ context }) => {
     const [update, setUpdate] = useState("");
     const navigate = useNavigate();
     const id = useParams();
+    const errors = useRef();
 
     useEffect( () => {
         context.data
@@ -22,6 +23,14 @@ return (
     <main>
         <div className="wrap">
             <h2>Update Course</h2>
+            <div className="validation--errors">
+                <h3>Validation Errors</h3>
+                <ul>
+                  {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                  ))}
+                </ul>
+            </div>
             <form onSubmit={handleUpdate}>
                 <div className="main--flex">
                     <div>
