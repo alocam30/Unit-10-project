@@ -10,7 +10,7 @@ const Courses = ({ context }) => {
       .getCourses()
       .then((data) => setCourses(data))
       .catch((err) => {console.log(err); 
-        navigate("/error")});
+        navigate("/")});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

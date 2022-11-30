@@ -1,5 +1,5 @@
-import React, {useContext, useRef, useState} from "react";
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import React, {useContext, useRef} from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const UserSignUp = () => {
     const firstName = useRef(null);

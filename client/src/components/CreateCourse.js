@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -15,6 +15,8 @@ const handleChange= (e) => {
  setCourseDescription(e.target.value);
  setEstimatedTime(e.target.value);
  setMaterialsNeeded(e.target.value);
+
+ navigate("/");
 };
 
     return(
@@ -28,7 +30,7 @@ const handleChange= (e) => {
                         <li>Please provide a value for "Description"</li>
                     </ul>
                 </div>
-                <form onSubmit={handleClick}>
+                <form onSubmit={handleChange}>
                     <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
@@ -39,7 +41,7 @@ const handleChange= (e) => {
                              onChange={handleChange}
                              value={title}/>
 
-                            <p>By {user.name}</p>
+                            <p>By </p>
 
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea 
