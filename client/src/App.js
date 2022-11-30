@@ -4,7 +4,6 @@ import { Route, Routes} from "react-router-dom";
 import withContext, { Provider } from "./Context";
 
 
-
 //------------------COMPONENTS---------------//
 import Header from "./components/Header";
 import Courses from "./components/Courses";

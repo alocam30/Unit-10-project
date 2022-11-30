@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useContext, useRef, useState} from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 
 const UserSignUp = () => {
@@ -17,7 +17,23 @@ const UserSignUp = () => {
             emailAddress: emailAddress.current.value,
             password: password.current.value,
         };
-    }
+        
+        useContext.data
+        .createUser(user)
+        .then ( (errors) => {
+          if (errors.length) {
+            this.setState({ errors });
+          } else {
+            console.log(`${firstName} ${lastName} is succcessfully signed up and authenticated!`)
+          }
+        })
+        .catch( (err) => {
+          console.log(err);
+          this.props.history.push("/error");
+          })
+          navigate("/")
+        };
+    
 
     return (
         <main>
@@ -55,7 +71,7 @@ const UserSignUp = () => {
                     <button className="button" type="submit">Sign Up</button>
                     <Link className="button button-secondary" to="/">Cancel</Link>
                 </form>
-                    <p>Already have a user account?<Link to="/signin">Click here to</Link> to sign in!
+                    <p>Already have a user account?<Link to="/signin"> Click here </Link> to sign in!
                     </p>
             </div>
         </main>
