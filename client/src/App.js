@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import withContext, { Provider } from "./Context";
 
 
@@ -29,7 +29,7 @@ const App = () => {
     <Provider>
     <React.Fragment>
       <HeaderWithContext />
-       <BrowserRouter>
+
         <Routes>
           <Route path="/" element={<CoursesWithContext />} />
           <Route path="/courses/create" element={<CreateCourseWithContext />} />
@@ -39,7 +39,7 @@ const App = () => {
           <Route path="/signout" element={<UserSignOutWithContext />} />
           <Route path="/signup" element={<UserSignUpWithContext />} />
         </Routes>
-       </BrowserRouter> 
+
     </React.Fragment>
     </Provider> 
   );
