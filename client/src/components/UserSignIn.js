@@ -1,17 +1,28 @@
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 
 const UserSignIn = ({ context }) => {
   const emailAddress = useRef(null);
   const password = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await context.actions
       .signIn(emailAddress.current.value, password.current.value)
-      .then(navigate("/courses"));
-  };
+      .then(() => {
+        if (location.state?.from) {
+          navigate(location.state.from);
+        } else {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/error");
+    });
+   };
 
 
 
@@ -37,7 +48,7 @@ const UserSignIn = ({ context }) => {
             defaultValue=""
             ref={password}
           />
-          <button className="button" type="submit" to="/courses">
+          <button className="button" type="submit" >
             Sign In
           </button>
           <Link className="button button-secondary" to="/">

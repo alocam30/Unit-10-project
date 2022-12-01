@@ -1,7 +1,8 @@
-import React, {useContext, useRef} from "react";
+import React, { useRef} from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const UserSignUp = () => {
+
+const UserSignUp = ({ context }) => {
     const firstName = useRef(null);
     const lastName = useRef(null);
     const emailAddress = useRef(null);
@@ -10,7 +11,7 @@ const UserSignUp = () => {
 
     const navigate = useNavigate();
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         const user = {
             firstName: firstName.current.value,
@@ -19,7 +20,7 @@ const UserSignUp = () => {
             password: password.current.value,
         };
         
-        useContext.data
+        await context.actions
         .createUser(user)
         .then ( (errors) => {
           if (errors.length) {

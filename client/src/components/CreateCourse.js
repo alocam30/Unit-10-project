@@ -1,28 +1,44 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 
-const CreateCourse = () => {
-const navigate = useNavigate();
-const errors = useRef();
+const CreateCourse = ({ context }) => {
+    const navigate = useNavigate();
 
-const [title, setTitle] = useState();
-const [courseDescription, setCourseDescription] = useState();
-const [estimatedTime, setEstimatedTime] = useState();
-const [materialsNeeded, setMaterialsNeeded] = useState();
+    const [errors, setErrors] = useState([]);
+    const authUser = context.authenticatedUser;
+    const title = useRef(null);
+    const description = useRef(null);
+    const estimatedTime = useRef(null);
+    const materialsNeeded= useRef(null);
 
-const handleChange= (e) => {
- setTitle(e.target.value);
- setCourseDescription(e.target.value);
- setEstimatedTime(e.target.value);
- setMaterialsNeeded(e.target.value);
+    /**
+     *
+     * @param {event object} e - prevents the default functionality of form submission
+     *  creates a course object that references input values
+     *  * the course object is them passed to createCourse function via context along with username and password
+     */
 
-    useContext.data
-    .then ( (errors) => {
+    const handleChange= (e) => {
+    e.preventDefault();
+    const course = {
+    userId: context.authenticatedUser.id,
+    title: title.current.value,
+    description: description.current.value,
+    estimatedTime: estimatedTime.current.value,
+    materialsNeeded: materialsNeeded.current.value,
+    };
+    context.data
+      .createCourse(
+          course,
+          context.authenticatedUser.email,
+          context.authenticatedUser.password
+        )
+      .then ( (errors) => {
         if (errors.length) {
           this.setState({ errors });
         } else {
-          console.log(`${title} was successfully created!`)
+          navigate("/")
         }
       })
       .catch( (err) => {
@@ -54,18 +70,16 @@ const handleChange= (e) => {
                              id="courseTitle" 
                              name="courseTitle" 
                              type="text" 
-                             onChange={handleChange}
-                             value={title}/>
+                             ref={title}/>
 
-                            <p>By </p>
+                            <p>By {authUser.firstName} {authUser.lastName} </p>
 
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea 
                              id="courseDescription" 
                              name="courseDescription"
                              type="text"
-                             onChange={handleChange}
-                             value={courseDescription}>
+                             ref={description}>
                              </textarea>
                         </div>
                         <div>
@@ -74,16 +88,14 @@ const handleChange= (e) => {
                              id="estimatedTime" 
                              name="estimatedTime" 
                              type="text" 
-                             onChange={handleChange}
-                             value={estimatedTime}
+                             ref={estimatedTime}
                              />
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
                             <textarea 
                              id="materialsNeeded" 
                              name="materialsNeeded"
-                             onChange={handleChange}
-                             value={materialsNeeded}>
+                             ref={materialsNeeded}>
                              </textarea>
                         </div>
                     </div>
