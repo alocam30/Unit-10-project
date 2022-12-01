@@ -9,8 +9,8 @@ const UserSignUp = ({ context }) => {
 
     const firstName = useRef(null);
     const lastName = useRef(null);
-    const emailAddress = useRef();
-    const password = useRef();
+    const emailAddress = useRef(null);
+    const password = useRef(null);
 
 
     const handleSignUp =  (e) => {
@@ -29,7 +29,7 @@ const UserSignUp = ({ context }) => {
             setErrors({ errors });
           } else {
             context.actions
-              .signIn(emailAddress.current.value, password.current.value)
+              .signIn()
               .then(() => {
                 console.log("authenticated");
                 navigate("/");
@@ -38,9 +38,9 @@ const UserSignUp = ({ context }) => {
         })
         .catch( (err) => {
           console.log(err);
-          this.props.history.push("/error");
+          navigate("/");
           })
-          navigate("/")
+        
         };
     
 

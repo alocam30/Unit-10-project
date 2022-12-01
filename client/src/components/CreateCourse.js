@@ -38,11 +38,10 @@ const CreateCourse = ({ context }) => {
         })
         .catch( (err) => {
           console.log(err);
-          navigate("/error");
+          navigate("/");
           })
 
-          navigate("/");
-          };
+
 
     return(
         <main>
@@ -102,5 +101,6 @@ const CreateCourse = ({ context }) => {
         </main>          
     );
 } 
+}
 
 export default CreateCourse;
