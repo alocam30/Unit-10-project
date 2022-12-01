@@ -10,8 +10,10 @@ const UserSignIn = ({ context }) => {
     e.preventDefault();
     await context.actions
       .signIn(emailAddress.current.value, password.current.value)
-      .then(navigate("/"));
+      .then(navigate("/courses"));
   };
+
+
 
   return (
     <main>
@@ -35,7 +37,7 @@ const UserSignIn = ({ context }) => {
             defaultValue=""
             ref={password}
           />
-          <button className="button" type="submit">
+          <button className="button" type="submit" to="/courses">
             Sign In
           </button>
           <Link className="button button-secondary" to="/">
