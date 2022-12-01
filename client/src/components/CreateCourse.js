@@ -6,48 +6,43 @@ const CreateCourse = ({ context }) => {
     const navigate = useNavigate();
 
     const [errors, setErrors] = useState([]);
+
     const authUser = context.authenticatedUser;
-    const title = useRef(null);
-    const description = useRef(null);
-    const estimatedTime = useRef(null);
-    const materialsNeeded= useRef(null);
+    const title = useRef();
+    const description = useRef();
+    const estimatedTime = useRef();
+    const materialsNeeded= useRef();
 
-    /**
-     *
-     * @param {event object} e - prevents the default functionality of form submission
-     *  creates a course object that references input values
-     *  * the course object is them passed to createCourse function via context along with username and password
-     */
-
+   
     const handleChange= (e) => {
-    e.preventDefault();
-    const course = {
-    userId: context.authenticatedUser.id,
-    title: title.current.value,
-    description: description.current.value,
-    estimatedTime: estimatedTime.current.value,
-    materialsNeeded: materialsNeeded.current.value,
-    };
-    context.data
-      .createCourse(
-          course,
-          context.authenticatedUser.email,
-          context.authenticatedUser.password
-        )
-      .then ( (errors) => {
-        if (errors.length) {
-          this.setState({ errors });
-        } else {
-          navigate("/")
-        }
-      })
-      .catch( (err) => {
-        console.log(err);
-        this.props.history.push("/error");
+      e.preventDefault();
+      const course = {
+      userId: context.authenticatedUser.id,
+      title: title.current.value,
+      description: description.current.value,
+      estimatedTime: estimatedTime.current.value,
+      materialsNeeded: materialsNeeded.current.value,
+      };
+      context.data
+        .createCourse(
+            course,
+            context.authenticatedUser.email,
+            context.authenticatedUser.password
+          )
+        .then ( (errors) => {
+          if (errors.length) {
+            setErrors({ errors });
+          } else {
+            navigate("/")
+          }
         })
+        .catch( (err) => {
+          console.log(err);
+          navigate("/error");
+          })
 
-        navigate("/");
-        };
+          navigate("/");
+          };
 
     return(
         <main>

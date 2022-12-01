@@ -1,17 +1,19 @@
-import React, { useRef} from "react";
+import React, { useRef, useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 
 const UserSignUp = ({ context }) => {
+
+  const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
+
     const firstName = useRef(null);
     const lastName = useRef(null);
-    const emailAddress = useRef(null);
-    const password = useRef(null);
-    const errors = useRef(null);
+    const emailAddress = useRef();
+    const password = useRef();
 
-    const navigate = useNavigate();
 
-    const handleSignUp = async (e) => {
+    const handleSignUp =  (e) => {
         e.preventDefault();
         const user = {
             firstName: firstName.current.value,
@@ -20,13 +22,18 @@ const UserSignUp = ({ context }) => {
             password: password.current.value,
         };
         
-        await context.actions
+        context.data
         .createUser(user)
         .then ( (errors) => {
           if (errors.length) {
-            this.setState({ errors });
+            setErrors({ errors });
           } else {
-            console.log(`${firstName} ${lastName} is succcessfully signed up and authenticated!`)
+            context.actions
+              .signIn(emailAddress.current.value, password.current.value)
+              .then(() => {
+                console.log("authenticated");
+                navigate("/");
+              });
           }
         })
         .catch( (err) => {

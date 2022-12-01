@@ -29,24 +29,6 @@ export class Provider extends Component {
     );
   }
 
-  submit = () => {
-    const { context } = this.props;
-    const {
-      emailAddress,
-      password,
-     } = this.state; 
-    const user = { 
-      emailAddress,
-      password,
-     };
-
-    context.data.createUser(user)
-     .then( errors => {
-      if (errors.length) {
-        this.setState({ errors });
-      }
-     })
-     };
   
 
 
