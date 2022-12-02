@@ -13,7 +13,7 @@ const UserSignUp = ({ context }) => {
     const password = useRef(null);
 
 
-    const handleSignUp =  (e) => {
+    const handleChange =  (e) => {
         e.preventDefault();
         const user = {
             firstName: firstName.current.value,
@@ -21,7 +21,17 @@ const UserSignUp = ({ context }) => {
             emailAddress: emailAddress.current.value,
             password: password.current.value,
         };
-        
+      }
+      
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const user = {
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+          errors,
+        };
         context.data
         .createUser(user)
         .then ( (errors) => {
@@ -58,35 +68,43 @@ const UserSignUp = ({ context }) => {
                 </ul>
             </div>
              ) : null}
-                <form onSubmit={handleSignUp}>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
                     <input 
                       id="firstName" 
                       name="firstName" 
                       type="text" 
                       defaultValue=""
-                      ref={firstName}/>
+                      ref={firstName}
+                      onChange={handleChange}
+                      />
                     <label htmlFor="lastName">Last Name</label>
                     <input 
                       id="lastName" 
                       name="lastName" 
                       type="text" 
                       defaultValue=""
-                      ref={lastName}/>
+                      ref={lastName}
+                      onChange={handleChange}
+                      />
                     <label htmlFor="emailAddress">Email Address</label>
                     <input 
                       id="emailAddress" 
                       name="emailAddress"
                       type="email" 
                       defaultValue=""
-                      ref={emailAddress}/>
+                      ref={emailAddress}
+                      onChange={handleChange}
+                      />
                     <label htmlFor="password">Password</label>
                     <input
                       id="password" 
                       name="password" 
                       type="password" 
                       defaultValue=""
-                      ref={password}/>
+                      ref={password}
+                      onChange={handleChange}
+                      />
                     <button className="button" type="submit">Sign Up</button>
                     <Link className="button button-secondary" to="/">Cancel</Link>
                 </form>

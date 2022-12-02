@@ -1,37 +1,55 @@
-import React, { useState, useRef } from 'react';
+import React, { useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 
 const CreateCourse = ({ context }) => {
-    const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [estimatedTime, seteEtimatedTime] = useState("");
+  const [materialsNeeded, setMaterialsNeeded] = useState("");
+  const [errors, setErrors] = useState([]);
 
-    const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
 
-    const authUser = context.authenticatedUser;
-    const title = useRef();
-    const description = useRef();
-    const estimatedTime = useRef();
-    const materialsNeeded= useRef();
+  const handleChange = (e) => {
+    e.preventDefault();
 
-   
-    const handleChange = (e) => {
-      e.preventDefault();
-      const course = {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === "courseTitle") {
+      setTitle(value);
+    } else if (name === "courseDescription") {
+      setDescription(value);
+    } else if (name === "estimatedTime") {
+      seteEtimatedTime(value);
+    } else if (name === "materialsNeeded") {
+      setMaterialsNeeded(value);
+    } else {
+      return;
+    }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const body = {
       userId: context.authenticatedUser.id,
-      title: title.current.value,
-      description: description.current.value,
-      estimatedTime: estimatedTime.current.value,
-      materialsNeeded: materialsNeeded.current.value,
-      };
-      context.data
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+    };
+     await context.data
         .createCourse(
-            course,
-            context.authenticatedUser.email,
+            body,
+            context.authenticatedUser.emailAddress,
             context.authenticatedUser.password
           )
         .then ( (errors) => {
           if (errors.length) {
-            setErrors({ errors });
+            setErrors( errors );
           } else {
             navigate("/")
           }
@@ -57,7 +75,7 @@ const CreateCourse = ({ context }) => {
                   </ul>
               </div>
             ) : null}
-                <form onSubmit={handleChange}>
+                <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
@@ -65,16 +83,19 @@ const CreateCourse = ({ context }) => {
                              id="courseTitle" 
                              name="courseTitle" 
                              type="text" 
-                             ref={title}/>
+                             value={title}
+                             onChange={handleChange}
+                             />
 
-                            <p>By {authUser.firstName} {authUser.lastName} </p>
+                            <p>By {context.authenticatedUser.firstName} {context.authenticatedUser.lastName} </p>
 
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea 
                              id="courseDescription" 
                              name="courseDescription"
                              type="text"
-                             ref={description}>
+                             value={description}
+                             onChange={handleChange}>
                              </textarea>
                         </div>
                         <div>
@@ -83,14 +104,17 @@ const CreateCourse = ({ context }) => {
                              id="estimatedTime" 
                              name="estimatedTime" 
                              type="text" 
-                             ref={estimatedTime}
+                             value={estimatedTime}
+                             onChange={handleChange}
                              />
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
                             <textarea 
                              id="materialsNeeded" 
                              name="materialsNeeded"
-                             ref={materialsNeeded}>
+                             defaultValue=""
+                             value={materialsNeeded}
+                             onChange={handleChange}>
                              </textarea>
                         </div>
                     </div>

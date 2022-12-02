@@ -13,61 +13,76 @@ const UpdateCourse = ({ context }) => {
     const [estimatedTime, setEstimatedTime] = useState("");
     const [materialsNeeded, setMaterialsNeeded] = useState("");
 
-    useEffect( () => {
-        context.data
+    useEffect(() => {
+      context.data
         .getCourse(id)
-        .then((course) => {
-            if (course) {
-              if (course.userId !== context.authenticatedUser?.id) {
-                navigate("/");
-              }
-              setCourse(course);
-              setTitle(course.title);
-              setDescription(course.description);
-              setEstimatedTime(course.estimatedTime);
-              setMaterialsNeeded(course.materialsNeeded);
-            }
-          })
-          .catch((err) => {
-            if (err.message === "404") {
-              navigate("/");
-            } else {
-              navigate("/");
-            }
-          });
-          // eslint-disable-next-line react-hooks/exhaustive-deps
+        .then((data) => {
+          setCourse(data);
+          setTitle(data.title);
+          setDescription(data.description);
+          setEstimatedTime(data.estimatedTime);
+          setMaterialsNeeded(data.materialsNeeded);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+  
 
-    const handleUpdate = (e) => {
+    const handleChange = (e) => {
+      e.preventDefault();
+      const name = e.target.name;
+      const value = e.target.value;
+  
+      if (name === "courseTitle") {
+        setTitle(value);
+      } else if (name === "courseDescription") {
+        setDescription(value);
+      } else if (name === "estimatedTime") {
+        setEstimatedTime(value);
+      } else if (name === "materialsNeeded") {
+        setMaterialsNeeded(value);
+      } else {
+        return;
+      }
+    };
+
+    const handleUpdate = async (e) => {
         e.preventDefault();
 
-        const course = {
+        const body = {
           title,
           description,
           estimatedTime,
           materialsNeeded,
         };
-        context.data
+        await context.data
           .updateCourse(
             id,
-            course,
-            context.authenticatedUser.email,
+            body,
+            context.authenticatedUser.emailAddress,
             context.authenticatedUser.password
           )
           .then((errors) => {
             if (errors.length) {
               setErrors(errors);
-              console.log(errors);
+
             } else {
               navigate("/");
             }
           })
           .catch((err) => {
-            console.log("interal server error", err);
+            console.log(err);
             navigate("/");
           });   
     }
 
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    navigate(`/courses/${id}`);
+  };
 
 return (
     <main>
@@ -92,9 +107,7 @@ return (
                             name="courseTitle" 
                             type="text" 
                             value="Build a Basic Bookcase"
-                            onChange={(e) => {
-                                setTitle(e.target.value);
-                                }}
+                            onChange={handleChange}
                             />
 
                         <p>By {course.firstName} {course.lastName}</p>
@@ -104,24 +117,26 @@ return (
                             id="courseDescription" 
                             name="courseDescription"
                             value={description}
-                            onChange={(e) => {
-                            setDescription(e.target.value);
-                            }}>
+                            onChange={handleChange}>
                         </textarea>
                     </div>
                     <div>
                         <label hmtlFor="estimatedTime">Estimated Time</label>
                         <input id="estimatedTime" name="estimatedTime" type="text" value={estimatedTime}
-                            onChange={(e) => {
-                                setEstimatedTime(e.target.value)
-                            }}
+                            onChange={handleChange}
                         />
 
                         <label htmlFor="materialsNeeded">Materials Needed</label>
-                        <textarea id="materialsNeeded" name="materialsNeeded">* 1/2 x 3/4 inch parting strip&#13;&#13;* 1 x 2 common pine&#13;&#13;* 1 x 4 common pine&#13;&#13;* 1 x 10 common pine&#13;&#13;* 1/4 inch thick lauan plywood&#13;&#13;* Finishing Nails&#13;&#13;* Sandpaper&#13;&#13;* Wood Glue&#13;&#13;* Wood Filler&#13;&#13;* Minwax Oil Based Polyurethane</textarea>
+                        <textarea 
+                          id="materialsNeeded" 
+                          name="materialsNeeded"
+                          value={materialsNeeded}
+                          onChange={handleChange}></textarea>
                     </div>
                 </div>
-                <button class="button" type="submit">Update Course</button><button class="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button>
+                <button className="button" type="submit">Update Course</button>
+                <button className="button button-secondary" 
+                  onChange={handleCancel}>Cancel</button>
             </form>
         </div>
     </main>
