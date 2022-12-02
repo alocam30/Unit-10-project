@@ -55,10 +55,10 @@ const CreateCourse = ({ context }) => {
           }
         })
         .catch( (err) => {
-          console.log(err);
+          console.error(err);
           navigate("/");
-          })
-        }   
+          });
+        };   
 
 
     return(
@@ -93,7 +93,6 @@ const CreateCourse = ({ context }) => {
                             <textarea 
                              id="courseDescription" 
                              name="courseDescription"
-                             type="text"
                              value={description}
                              onChange={handleChange}>
                              </textarea>
@@ -112,7 +111,6 @@ const CreateCourse = ({ context }) => {
                             <textarea 
                              id="materialsNeeded" 
                              name="materialsNeeded"
-                             defaultValue=""
                              value={materialsNeeded}
                              onChange={handleChange}>
                              </textarea>
