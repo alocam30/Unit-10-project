@@ -39,7 +39,7 @@ const CourseDetail = ({ context }) => {
             }
           })
           .catch((errors) => {
-            console.error(errors);
+            console.log(errors);
             navigate("/");
           });
       };
