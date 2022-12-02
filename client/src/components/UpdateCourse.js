@@ -106,7 +106,7 @@ return (
                             id="courseTitle"
                             name="courseTitle" 
                             type="text" 
-                            value="Build a Basic Bookcase"
+                            value={title}
                             onChange={handleChange}
                             />
 
