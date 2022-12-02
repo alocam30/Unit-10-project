@@ -38,9 +38,8 @@ const UserSignUp = ({ context }) => {
             setErrors( errors );
           } else {
             context.actions
-              .signIn()
+              .signIn(emailAddress, password)
               .then(() => {
-                console.log("authenticated");
                 navigate("/");
               });
           }
