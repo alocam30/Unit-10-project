@@ -12,7 +12,7 @@ const UserSignIn = ({ context }) => {
     await context.actions
       .signIn(emailAddress.current.value, password.current.value)
       .then(() => {
-        if (location.state?.from) {
+        if (location.state) {
           navigate(location.state.from);
         } else {
           navigate("/");
@@ -20,7 +20,7 @@ const UserSignIn = ({ context }) => {
       })
       .catch((err) => {
         console.log(err);
-        navigate("/error");
+        navigate("/");
     });
    };
 

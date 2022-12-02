@@ -4,7 +4,7 @@ import  ReactMarkdown  from 'react-markdown';
 
 const CourseDetail = ({ context }) => {
     const [course, setCourse] = useState([]);
-    const [setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
   
     const { id } = useParams();
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const CourseDetail = ({ context }) => {
     useEffect(() => {
         context.data
             .getCourse(id)
-            .then((data) => {setCourse(data)})
+            .then((data) => {setCourse(data)}  )
             .catch((err) => {console.log(err)}); 
             
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,31 +24,27 @@ const CourseDetail = ({ context }) => {
 
     const handleDelete = async (e) => {
         e.preventDefault();
-    
+        
         await context.data
           .deleteCourse(
             id,
             context.authenticatedUser.emailAddress,
             context.authenticatedUser.password
           )
-          .then((errors) => {
-            if (errors.length) {
-              setErrors(errors);
-            } else {
-              navigate("/");
-            }
-          })
-          .catch((errors) => {
-            console.log(errors);
-            navigate("/");
-          });
+          .then(
+              navigate("/"))
+        //   .catch((errors) => {
+        //     console.log(errors);
+        //     navigate("/");
+        //   });
       };
 
     return (
         <main>
             <div className="actions--bar">
+
             {context.authenticatedUser &&
-            context.authenticatedUser.id === course.user?.id ? (
+            context.authenticatedUser.id === course.userId ? (
           <div className="wrap">
             <Link className="button" to="update">
               Update Course

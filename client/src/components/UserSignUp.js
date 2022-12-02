@@ -13,30 +13,29 @@ const UserSignUp = ({ context }) => {
     const password = useRef(null);
 
 
-    const handleChange =  (e) => {
-        e.preventDefault();
-        const user = {
-            firstName: firstName.current.value,
-            lastName: lastName.current.value,
-            emailAddress: emailAddress.current.value,
-            password: password.current.value,
-        };
-      }
+    // const handleChange =  (e) => {
+    //     e.preventDefault();
+    //     const user = {
+    //         firstName: firstName.current.value,
+    //         lastName: lastName.current.value,
+    //         emailAddress: emailAddress.current.value,
+    //         password: password.current.value,
+    //     };
+    //   }
       
       const handleSubmit = (e) => {
         e.preventDefault();
         const user = {
-          firstName,
-          lastName,
-          emailAddress,
-          password,
-          errors,
+          firstName: firstName.current.value,
+          lastName: lastName.current.value,
+          emailAddress: emailAddress.current.value,
+          password: password.current.value,
         };
         context.data
         .createUser(user)
         .then ( (errors) => {
           if (errors.length) {
-            setErrors({ errors });
+            setErrors( errors );
           } else {
             context.actions
               .signIn()
@@ -76,7 +75,7 @@ const UserSignUp = ({ context }) => {
                       type="text" 
                       defaultValue=""
                       ref={firstName}
-                      onChange={handleChange}
+                      // onChange={handleChange}
                       />
                     <label htmlFor="lastName">Last Name</label>
                     <input 
@@ -85,7 +84,7 @@ const UserSignUp = ({ context }) => {
                       type="text" 
                       defaultValue=""
                       ref={lastName}
-                      onChange={handleChange}
+                      // onChange={handleChange}
                       />
                     <label htmlFor="emailAddress">Email Address</label>
                     <input 
@@ -94,7 +93,7 @@ const UserSignUp = ({ context }) => {
                       type="email" 
                       defaultValue=""
                       ref={emailAddress}
-                      onChange={handleChange}
+                      // onChange={handleChange}
                       />
                     <label htmlFor="password">Password</label>
                     <input
@@ -103,7 +102,7 @@ const UserSignUp = ({ context }) => {
                       type="password" 
                       defaultValue=""
                       ref={password}
-                      onChange={handleChange}
+                      // onChange={handleChange}
                       />
                     <button className="button" type="submit">Sign Up</button>
                     <Link className="button button-secondary" to="/">Cancel</Link>
