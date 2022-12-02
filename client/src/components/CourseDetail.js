@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ReactMarkdown } from 'react-markdown';
+import  ReactMarkdown  from 'react-markdown';
 
 const CourseDetail = ({ context }) => {
     const [course, setCourse] = useState([]);
@@ -11,8 +11,8 @@ const CourseDetail = ({ context }) => {
     const firstName = useRef(null);
     const lastName = useRef(null);
     const title = useRef(null);
-    const description = useRef(null);
-    const materialsNeeded = useRef(null);
+    // const description = useRef(null);
+    // const materialsNeeded = useRef(null);
     const estimatedTime = useRef(null);
 
 
@@ -20,13 +20,7 @@ const CourseDetail = ({ context }) => {
         context.data.course
             .getCourse(id)
             .then((data) => {setCourse(data)})
-            // .catch((err) => {
-            //     if (err.message === "404") {
-            //       navigate("/");
-            //     } else {
-            //       navigate("/");
-            //     }
-            //   });
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
@@ -78,5 +72,6 @@ const CourseDetail = ({ context }) => {
 
     )
 };
+
 
 export default CourseDetail;
