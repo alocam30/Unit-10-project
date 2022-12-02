@@ -37,9 +37,9 @@ const App = () => {
           <Route 
             path="/courses/create" 
             element={
-              // <PrivateRouteWithContext>
+              <PrivateRouteWithContext>
                 <CreateCourseWithContext />
-              // </PrivateRouteWithContext>
+               </PrivateRouteWithContext>
               } />
           <Route path="courses/:id" element={<CourseDetailWithContext />} />
           <Route 

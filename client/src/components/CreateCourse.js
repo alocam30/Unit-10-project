@@ -14,7 +14,7 @@ const CreateCourse = ({ context }) => {
     const materialsNeeded= useRef();
 
    
-    const handleChange= (e) => {
+    const handleChange = (e) => {
       e.preventDefault();
       const course = {
       userId: context.authenticatedUser.id,
@@ -40,22 +40,23 @@ const CreateCourse = ({ context }) => {
           console.log(err);
           navigate("/");
           })
-
+        }   
 
 
     return(
         <main>
             <div className="wrap">
                 <h2>Create Course</h2>
-                <div className="validation--errors">
-                <h3>Validation Errors</h3>
-                <ul>
-                  {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                  ))}
-                </ul>
-            </div>
-                </div>
+                  {errors && errors.length ? (    
+                  <div className="validation--errors">
+                  <h3>Validation Errors</h3>
+                  <ul>
+                    {errors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+              </div>
+            ) : null}
                 <form onSubmit={handleChange}>
                     <div className="main--flex">
                         <div>
@@ -98,9 +99,9 @@ const CreateCourse = ({ context }) => {
                      type="submit">Create Course</button>
                     <Link className="button button-secondary" to="/"> Cancel</Link>
                 </form> 
+              </div>  
         </main>          
     );
 } 
-}
 
 export default CreateCourse;
