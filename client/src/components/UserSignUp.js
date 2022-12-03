@@ -38,7 +38,7 @@ const UserSignUp = ({ context }) => {
             setErrors( errors );
           } else {
             context.actions
-              .signIn(emailAddress, password)
+              .signIn(emailAddress.current.value, password.current.value)
               .then(() => {
                 navigate("/");
               });
