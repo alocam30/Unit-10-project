@@ -16,6 +16,7 @@ import CreateCourse from "./components/CreateCourse";
 import UpdateCourse from './components/UpdateCourse';
 import PrivateRoute from "./components/PrivateRoute";
 
+//COMPONENTS WITH CONTEXT//
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
 const UserSignInWithContext = withContext(UserSignIn);
@@ -26,6 +27,8 @@ const UpdateCourseWithContext = withContext(UpdateCourse);
 const UserSignUpWithContext = withContext(UserSignUp);
 const PrivateRouteWithContext = withContext(PrivateRoute);
 
+
+//ROUTES
 const App = () => {
   return (
     <Provider>

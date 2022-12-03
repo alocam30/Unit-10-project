@@ -1,4 +1,6 @@
 //stateless component
+//This component is used to sign out
+
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 

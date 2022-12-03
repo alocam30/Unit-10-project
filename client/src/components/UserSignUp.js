@@ -12,17 +12,8 @@ const UserSignUp = ({ context }) => {
     const emailAddress = useRef(null);
     const password = useRef(null);
 
-
-    // const handleChange =  (e) => {
-    //     e.preventDefault();
-    //     const user = {
-    //         firstName: firstName.current.value,
-    //         lastName: lastName.current.value,
-    //         emailAddress: emailAddress.current.value,
-    //         password: password.current.value,
-    //     };
-    //   }
-      
+    
+    //create user
       const handleSubmit = (e) => {
         e.preventDefault();
         const user = {

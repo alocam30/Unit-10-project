@@ -1,3 +1,6 @@
+//This component creates a new course 
+//The user must fill out the Title and Description if not then validation errors display
+
 import React, { useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 

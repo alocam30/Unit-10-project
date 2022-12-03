@@ -1,3 +1,6 @@
+//This component updates a course 
+//The user must fill out the Title and Description before submitting the update
+
 import React, { useEffect, useState } from 'react';
 import {  useNavigate, useParams } from "react-router-dom";
 

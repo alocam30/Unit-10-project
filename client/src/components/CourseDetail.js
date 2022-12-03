@@ -1,3 +1,5 @@
+//This component displays a course id and Update Course and Delete Course buttons
+
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import  ReactMarkdown  from 'react-markdown';

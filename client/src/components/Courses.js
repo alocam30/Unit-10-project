@@ -1,3 +1,5 @@
+//This component displays all of the courses on the main page and a New Course button
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 

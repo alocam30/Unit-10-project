@@ -1,3 +1,5 @@
+//This component is a Sign In page
+
 import { useRef } from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 
