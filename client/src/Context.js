@@ -16,6 +16,7 @@ export class Provider extends Component {
 
   render() {
     const { authenticatedUser } = this.state;
+    //Create a value object
     const value = {
       authenticatedUser,
       data: this.data,
@@ -24,6 +25,8 @@ export class Provider extends Component {
         signOut: this.signOut,
       },
     };
+
+    //pass context to the provider
     return (
       <Context.Provider value={value}>{this.props.children}</Context.Provider>
     );
@@ -31,7 +34,7 @@ export class Provider extends Component {
 
   
 
-
+//signIn functions retrieves a user's credentials 
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
     const plainText = password;

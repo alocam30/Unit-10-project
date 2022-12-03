@@ -1,6 +1,8 @@
 
 import { Buffer } from "buffer";
 
+//This method is used to make  GET, POST, PUT, AND DELETE requests to the REST API
+
 export default class Data {
   api(
     path,
@@ -22,6 +24,8 @@ export default class Data {
       options.body = JSON.stringify(body);
     }
 
+    //Checks if authorization is required
+
     if (requiresAuth) {
       const encodedCredentials = Buffer.from(
         `${credentials.username}:${credentials.password}`
@@ -30,7 +34,7 @@ export default class Data {
     }
     return fetch(url, options);
   }
-
+//GET user
   async getUser(username, password) {
     const response = await this.api(`/users`, "GET", null, true, {
       username,
@@ -45,6 +49,7 @@ export default class Data {
     }
   }
 
+  //CREATE user
   async createUser(user) {
     const response = await this.api("/users", "POST", user);
     if (response.status === 201) {
@@ -58,6 +63,7 @@ export default class Data {
     }
   }
 
+  //GET courses
   async getCourses() {
     const response = await this.api("/courses", "GET");
     if (response.status === 200) {
@@ -67,6 +73,7 @@ export default class Data {
     }
   }
 
+  //GET a course
   async getCourse(id) {
     const response = await this.api(`/courses/${id}`, "GET");
     if (response.status === 200) {
@@ -76,7 +83,7 @@ export default class Data {
     }
   }
 
-
+//CREATE course
 async createCourse(body, username, password) {
   const response = await this.api(`/courses`, "POST", body, true, {
     username,
@@ -94,6 +101,7 @@ async createCourse(body, username, password) {
   }
 }
 
+//Update course
 async updateCourse(id, body, username, password) {
   const response = await this.api(`/courses/${id}`, "PUT", body, true, {
     username,
@@ -112,6 +120,8 @@ async updateCourse(id, body, username, password) {
   }
 ;}
 
+
+//DELETE course
 async deleteCourse(id, username, password) {
   const response = await this.api(`/courses/${id}`, "DELETE", null, true, {
     username,

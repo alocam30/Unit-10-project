@@ -104,7 +104,7 @@ return (
             <form onSubmit={handleUpdate}>
                 <div className="main--flex">
                     <div>
-                        <label htmlFor="courseTitle">Course Title</label>
+                        <label htmlfor="courseTitle">Course Title</label>
                         <input 
                             id="courseTitle"
                             name="courseTitle" 
@@ -115,7 +115,7 @@ return (
 
                         <p>By {course.firstName} {course.lastName}</p>
 
-                        <label htmlFor="courseDescription">Course Description</label>
+                        <label htmlfor="courseDescription">Course Description</label>
                         <textarea 
                             id="courseDescription" 
                             name="courseDescription"
@@ -124,12 +124,12 @@ return (
                         </textarea>
                     </div>
                     <div>
-                        <label hmtlFor="estimatedTime">Estimated Time</label>
+                        <label hmtlfor="estimatedTime">Estimated Time</label>
                         <input id="estimatedTime" name="estimatedTime" type="text" value={estimatedTime}
                             onChange={handleChange}
                         />
 
-                        <label htmlFor="materialsNeeded">Materials Needed</label>
+                        <label htmlfor="materialsNeeded">Materials Needed</label>
                         <textarea 
                           id="materialsNeeded" 
                           name="materialsNeeded"
